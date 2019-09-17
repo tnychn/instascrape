@@ -191,7 +191,7 @@ class Instagram(LoggerMixin):
             resp = session.post(url, data=payload)
             self.logger.debug(resp.json())
             data = resp.json()
-            if data["status"] != "ok" or not data["authenticated"]:
+            if data["status"] != "ok":
                 raise LoginError(data.get("message") or "incorrect security code")
             session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken", "")})
             self._session = session
