@@ -172,13 +172,15 @@ class MediaItem(AsDictMixin):
                     f.write(chunk)
             logger.debug("=> [{0}] {1} [{2}x{3}] ({4} kB)".format(mime, finish_filename, self.width or "?", self.height or "?", size))
         except Exception as e:
-            raise DownloadError(str(e), self.src)
+            raise DownloadError(str(e), self.src) from e
         else:
             # rename .part file to its real extension
+            if f:
+                f.close()
             os.rename(part_path, finish_path)
             return finish_path
         finally:
-            if f:
+            if f and not f.closed:
                 f.close()
 
 
