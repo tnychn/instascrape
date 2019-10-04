@@ -108,8 +108,8 @@ class Instagram(LoggerMixin):
             # Get a new cookie by username and password
             self.logger.debug("getting cookie by username and password")
             # get initial cookie data
-            session.get(BASE_URL + "/web/__mid")
-            session.headers.update({"X-CSRFToken": session.cookies.get_dict()["csrftoken"]})
+            req = session.get(BASE_URL + "/web/__mid")  # FIXME: use 'BASE_URL' instead?
+            session.headers.update({"X-CSRFToken": req.cookies.get_dict()["csrftoken"]})
             # send login request
             payload = {"username": username, "password": password}
             resp = session.post(LOGIN_URL, data=payload)
@@ -144,10 +144,6 @@ class Instagram(LoggerMixin):
 
         Arguments:
             code: Security code which is sent to your phone through SMS by Instagram.
-
-        Returns:
-            A string of the client's username.
-           A string of the client's user ID.
         """
         assert self._two_factor_pack is not None, "no two-factor authentication is required"
         session, payload = self._two_factor_pack
