@@ -54,7 +54,8 @@ def get_biggest_media(resources: list) -> dict:
 
 def get_username_from_userid(user_id: str) -> str:
     """Sends a HTTP GET API request to Instagram in order to obtain the username of a user by its user ID."""
-    resp = requests.get(USER_ID_URL.format(user_id=user_id), timeout=30)
+    headers = {"User-Agent": "Instagram 52.0.0.8.83 (iPhone; CPU iPhone OS 11_4 like Mac OS X; en_US; en-US; scale=2.00; 750x1334) AppleWebKit/605.1.15"}
+    resp = requests.get(USER_ID_URL.format(user_id=user_id), headers=headers, timeout=30)
     if resp.status_code == 404:
         raise NotFoundError("No user with ID {0} is found.".format(user_id))
     resp.raise_for_status()
