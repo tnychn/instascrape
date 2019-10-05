@@ -59,23 +59,13 @@ class Instagram(LoggerMixin):
 
     @property
     def _default_cookies(self) -> dict:
-        return {"sessionid": "", "mid": "", "csrftoken": "",
-                "ig_pr": "1", "ig_vw": "1920", "ig_cb": "1",
-                "s_network": "", "ds_user_id": ""}
+        return {"rur": "ATN", "ds_user_id": ""}
 
     def get_anonymous_session(self) -> requests.Session:
         """Returns a new anonymous session."""
         session = requests.Session()
-        headers = self._default_headers
-        del headers["Host"]
-        del headers["Origin"]
-        del headers["Referer"]
-        del headers["X-Instagram-AJAX"]
-        del headers["X-Requested-With"]
-        session.headers.update(headers)
-        cookies = self._default_cookies
-        del cookies["ig_cb"]
-        session.cookies.update(cookies)
+        session.headers.update(self._default_headers)
+        session.cookies.update(self._default_cookies)
         return session
 
     def login(self, username: str = None, password: str = None, cookies: RequestsCookieJar = None):
@@ -102,14 +92,22 @@ class Instagram(LoggerMixin):
             # Use provided cookie
             self.logger.debug("using provided cookie -> " + str(cookies))
             session.cookies = cookies
-            session.headers.update({"X-CSRFToken": cookies.get_dict()["csrftoken"]})
+            session.headers.update({"X-CSRFToken": cookies["csrftoken"]})
         else:
             assert all((username, password)), "both 'username' and 'password' must be specified"
             # Get a new cookie by username and password
             self.logger.debug("getting cookie by username and password")
             # get initial cookie data
-            req = session.get(BASE_URL + "/web/__mid")  # FIXME: use 'BASE_URL' instead?
-            session.headers.update({"X-CSRFToken": req.cookies.get_dict()["csrftoken"]})
+            # FIXME: ugly code, to be resolved
+            req = session.get("https://www.instagram.com")
+            if "csrftoken" in req.cookies or "csrftoken" in session.cookies:
+                session.headers.update({"X-CSRFToken": req.cookies.get("csrftoken") or session.cookies.get("csrftoken", "")})
+            else:
+                self.logger.debug("failed to find 'csrftoken' in first attempt, using endpoint '/web/__mid'")
+                req = session.get("https://www.instagram.com/web/__mid")
+                if "csrftoken" not in req.cookies or "csrftoken" not in session.cookies:
+                    raise InstascrapeError("cannot find 'csrftoken' from cookies")
+                session.headers.update({"X-CSRFToken": req.cookies.get("csrftoken") or session.cookies.get("csrftoken", "")})
             # send login request
             payload = {"username": username, "password": password}
             resp = session.post(LOGIN_URL, data=payload)
@@ -134,7 +132,7 @@ class Instagram(LoggerMixin):
                     msg = "user does not exist".format(username)
                 raise LoginError(data.get("message") or msg)
             else:
-                session.headers.update({"X-CSRFToken": resp.cookies.get_dict()["csrftoken"]})
+                session.headers.update({"X-CSRFToken": resp.cookies["csrftoken"] or session.cookies.get("csrftoken", "")})
         self._session = session
         self._post_login()
 
@@ -153,7 +151,7 @@ class Instagram(LoggerMixin):
         data = resp.json()
         if data["status"] != "ok" or not data["authenticated"]:
             raise LoginError(data.get("message") or "incorrect security code")
-        session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken", "")})
+        session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken") or session.cookies.get("csrftoken", "")})
         self._session = session
         self._two_factor_pack = None
         self._post_login()
@@ -175,12 +173,12 @@ class Instagram(LoggerMixin):
 
         url = BASE_URL + checkpoint_url
         resp = session.get(url)
-        session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken", ""), "X-Instagram-AJAX": "1", "Referer": url})
+        session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken") or session.cookies.get("csrftoken", ""), "Referer": url})
 
         payload = {"choice": mode}
         resp = session.post(url, data=payload)
         self.logger.debug(resp.json())
-        session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken", ""), "X-Instagram-AJAX": "1"})
+        session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken") or session.cookies.get("csrftoken", "")})
 
         def auth(code: str):
             payload = {"security_code": code}
@@ -189,7 +187,7 @@ class Instagram(LoggerMixin):
             data = resp.json()
             if data["status"] != "ok":
                 raise LoginError(data.get("message") or "incorrect security code")
-            session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken", "")})
+            session.headers.update({"X-CSRFToken": resp.cookies.get("csrftoken") or session.cookies.get("csrftoken", "")})
             self._session = session
             self._checkpoint_url = None
             self._post_login()
@@ -237,7 +235,7 @@ class Instagram(LoggerMixin):
         if match is None:
             raise ExtractionError("rhx_gis variable not found")
         self._rhx_gis = match.group(1)
-        self._session.cookies.update({"X-CSRFToken": resp.cookies.get("csrftoken", "")})
+        self._session.cookies.update({"X-CSRFToken": resp.cookies.get("csrftoken") or resp.cookies.get("csrftoken", "")})
         return self._rhx_gis
 
     def _fetch_json_data(self, url: str, **kwargs):
@@ -380,3 +378,4 @@ def Instascraper(username: str = None, password: str = None, cookies: dict = Non
             yield insta
         finally:
             insta.logout()
+            insta._session.close()
