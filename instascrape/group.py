@@ -121,7 +121,7 @@ class Group:
 
     def __preloader(self):
         # TODO: use asyncio producer/consumer for simplicity and better performance ?
-        logger.info("[⚑] Started Preloading")
+        logger.info("[*] Started Preloading")
 
         def worker(queue):
             while True:
@@ -205,7 +205,7 @@ class Group:
             e = self._error_bucket[0]
             raise e.exc_type(e.exc_value)
 
-        logger.info("[⚑] Completed Preloading")
+        logger.info("[*] Completed Preloading")
         for item in results:
             yield item
         if len(results) < self.length:
