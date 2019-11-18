@@ -18,10 +18,11 @@
   <a href="https://pypi.python.org/pypi/instascraper"><img alt="pypi project" src="https://img.shields.io/pypi/v/instascraper.svg"></a>
   <a href="https://pypi.python.org/pypi/instascraper"><img alt="pypi downloads" src="https://img.shields.io/pypi/dm/instascraper.svg"></a>
   <a href="./LICENSE.txt"><img alt="license" src="https://img.shields.io/github/license/a1phat0ny/instascrape.svg"></a>
+  <a href="https://paypal.me/tonychan2342"><img alt="donate" src="https://img.shields.io/badge/PayPal-donate!-blue?logo=PayPal"></a>
 </p>
 
 <div align="center">
-    <sub><strong>Made with ❤️ by a1phat0ny</strong></sub>
+    <sub><strong>Made with ♥︎ by a1phat0ny</strong></sub>
     <br>
     <sub><strong>MIT © 2019 Tony Chan</strong></sub>
 </div>
@@ -32,7 +33,8 @@
 from Instagram, without using the official Instagram Public API.
 
 > What makes **Instascrape** special, is that **Instascrape** aims at high efficeiency and speed.
-It provides a *preload* option that fetches and loads the full data of every item (Post/Profile) beforehand, using multithreading with the *producer-consumer* strategy.
+> It provides a *preload* option that fetches and loads the full data of every item (Post/Profile) beforehand,
+> using multithreading with the *producer-consumer* strategy.
 
 ## Features
 
@@ -102,9 +104,9 @@ with Instascraper() as insta:
 
 TODO
 
-~~For command-line (CLI) usage, see [`cli.md`](./cli.md).~~
+~~For command-line (CLI) usage, see [`CLI.md`](./CLI.md).~~
 
-~~For library (API) usage, see [`api.md`](./api.md).~~
+~~For library (API) usage, see [`API.md`](./API.md).~~
 
 ## Disclaimer
 
