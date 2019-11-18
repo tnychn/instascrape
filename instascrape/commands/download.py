@@ -11,7 +11,7 @@ from colorama import Fore, Style
 
 from instascrape import Instagram
 from instascrape.commands import error_print, warn_print, prompt, load_obj, error_catcher
-from instascrape.utils import to_datetime, data_dumper
+from instascrape.utils import to_datetime, data_dumper, clean_filename
 
 
 def progress_bar(total: int, sub: bool = False, hide: bool = False):
@@ -162,7 +162,7 @@ def highlights_downloader(insta, highlights: list, debug: bool, final_dest: str,
         downs = existings = 0
         bar = progress_bar(total=len(highlights), hide=debug)
         for highlight in highlights[:len(highlights) if limit is None else limit]:
-            subdir = os.path.join(final_dest, highlight.title)
+            subdir = os.path.join(final_dest, clean_filename(highlight.title))
             subbar = progress_bar(total=highlight.reel_count, sub=True, hide=debug or highlight.reel_count == 1)
             bar.set_description_str("[" + "⤓ Downloading".center(15) + "]")
             bar.set_postfix_str("(" + highlight.title[:12] + ("..." if len(highlight.title) > 12 else "") + ")")
@@ -171,7 +171,7 @@ def highlights_downloader(insta, highlights: list, debug: bool, final_dest: str,
             highlight.download(subdir, on_item_start=on_item_start, on_item_finish=on_item_finish, on_item_error=on_item_error)
             if dump_metadata:
                 bar.set_description_str("[" + "Ⓓ Dumping".center(15) + "]")
-                data_dumper(os.path.join(final_dest, highlight.title), "highlight", highlight.as_dict(extra=True))
+                data_dumper(subdir, "highlight", highlight.as_dict(extra=True))
             bar.update(1)
         bar.set_description_str(Fore.GREEN + "[" + "✔︎ Finished".center(15) + "]")
     except Exception as e:

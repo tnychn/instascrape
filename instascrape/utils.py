@@ -105,3 +105,13 @@ def to_datetime(timestamp: int, fmt: str = None) -> str:
 def to_timestamp(dt: str) -> int:
     """Converts a datetime formatted string to a timestamp."""
     return int(datetime.strptime(str(dt), "%Y-%m-%d-%H%M%S").timestamp())
+
+
+def clean_filename(filename: str) -> str:
+    """Clean the given filename string into a valid file path string.
+    * Currently only being called by 'instascrape.commands.download.highlights_downloader()'.
+    """
+    forbidden_chars = ["<", ">", ":", "\"", "/", "\\", "|", "?", "*"]
+    for char in forbidden_chars:
+        filename = filename.replace(char, "")
+    return filename.strip()
