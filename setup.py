@@ -24,9 +24,9 @@ LONG_DESC = (
     "  * 🖇 solves checkpoint challenge",
     "* 🕶 Can be used in anonymous mode",
 )
-AUTHOR = "a1phat0ny"
+AUTHOR = "tnychn"
 EMAIL = "tony.chan2342@gmail.com"
-URL = "https://github.com/a1phat0ny/instascrape"
+URL = "https://github.com/tnychn/instascrape"
 ENTRY = "instascrape=instascrape.__main__:main"
 PYTHON_REQUIRES = ">=3.5.0"
 REQUIRES = ["requests", "tqdm", "colorama"]
@@ -64,16 +64,4 @@ setup(
     packages=find_packages(),
     license="MIT",
     keywords=KEYWORDS,
-    classifiers=[  # https://pypi.org/classifiers
-        "License :: OSI Approved :: MIT License",
-        "Development Status :: 5 - Production/Stable",
-        "Natural Language :: English",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: Implementation :: CPython",
-        "Programming Language :: Python :: Implementation :: PyPy",
-        "Topic :: Software Development :: Version Control :: Git",
-        "Topic :: Utilities",
-    ],
 )
