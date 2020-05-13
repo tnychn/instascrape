@@ -14,10 +14,10 @@
 <br>
 
 <p align="center">
-  <a href="https://github.com/a1phat0ny/instascrape/releases"><img alt="github releases" src="https://img.shields.io/github/v/release/a1phat0ny/instascrape"></a>
+  <a href="https://github.com/tnychn/instascrape/releases"><img alt="github releases" src="https://img.shields.io/github/v/release/tnychn/instascrape"></a>
   <a href="https://pypi.python.org/pypi/instascraper"><img alt="pypi project" src="https://img.shields.io/pypi/v/instascraper.svg"></a>
   <a href="https://pypi.python.org/pypi/instascraper"><img alt="pypi downloads" src="https://img.shields.io/pypi/dm/instascraper.svg"></a>
-  <a href="./LICENSE.txt"><img alt="license" src="https://img.shields.io/github/license/a1phat0ny/instascrape.svg"></a>
+  <a href="./LICENSE.txt"><img alt="license" src="https://img.shields.io/github/license/tnychn/instascrape.svg"></a>
 </p>
 
 <div align="center">
@@ -75,7 +75,7 @@ from Instagram, without using the official Instagram Public API.
 #### Latest GitHub Commit
 
 ```shell script
-$ git clone https://github.com/a1phat0ny/instascrape.git
+$ git clone https://github.com/tnychn/instascrape.git
 $ cd instascrape
 $ python setup.py install
 ```
