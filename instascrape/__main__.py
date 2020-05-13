@@ -49,7 +49,7 @@ def main():
     description = bold("    \033[4m" + "Instascrape") + " -- " + "🚀 A {f.LIGHTBLUE_EX}fast{f.RESET} and {f.LIGHTGREEN_EX}lightweight{f.RESET} Instagram media downloader".format(f=Fore)
     epilog = (
         "‣ You are using " + Fore.LIGHTYELLOW_EX + "[instascrape v{}]".format(__version__) + Fore.RESET,
-        bold("Made with {f.LIGHTRED_EX}♥︎{f.RESET} by a1phat0ny".format(f=Fore)) + " " + "(https://github.com/a1phat0ny/instascrape)"
+        bold("Made with {f.LIGHTRED_EX}♥︎{f.RESET} by tnychn".format(f=Fore)) + " " + "(https://github.com/tnychn/instascrape)"
     )
     parser = argparse.ArgumentParser(prog="instascrape", description=description, epilog="\n".join(epilog),
                                      allow_abbrev=False, formatter_class=argparse.RawTextHelpFormatter)
