@@ -38,7 +38,7 @@ Commands:
     download (down)     Download media of the target.
 
 ‣ You are using [instascrape v2.0.0]
-Made with ♥︎ by a1phat0ny (https://github.com/a1phat0ny/instascrape)
+Made with ♥︎ by tnychn (https://github.com/tnychn/instascrape)
 ```
 
 ### Login
