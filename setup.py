@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 NAME = "instascraper"
 DESC = "A fast and lightweight Instagram media downloader."
 LONG_DESC = (
-    "**Instascrape** is a fast and lightweight utility and Python library for downloading a massive amount of media (photos and videos) from Instagram, without using the official Instagram Public API.",
+    "**instascrape** is a fast and lightweight utility and Python library for downloading a massive amount of media (photos and videos) from Instagram, without using the official Instagram Public API.",
     "## Features",
     "* 🔌 Powerful & simple-to-use library interface",
     "  * ⛓ calls methods in a chain (fluent interface)",
