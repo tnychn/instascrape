@@ -2,7 +2,7 @@
 
 <h1 align="center">instascrape</h1>
 
-<p align="center"><strong><i>A fast and lightweight Instagram media downloader.</i></strong></p>
+<p align="center"><strong><i>A fast and lightweight Instagram media downloader</i></strong></p>
 
 <div align="center">
   <img alt="demo" src="./demo.gif" width="480" height="320">
@@ -100,6 +100,11 @@ TODO
 ~~For command-line (CLI) usage, see [`CLI.md`](./CLI.md).~~
 
 ~~For library (API) usage, see [`API.md`](./API.md).~~
+
+## Contributing
+
+If you have any ideas on how to improve this project or if you think there is a lack of features,
+feel free to open an issue, or even better, open a pull request. All contributions are welcome!
 
 ## Disclaimer
 
