@@ -1,6 +1,6 @@
 <p align="center"><img alt="logo" src="./logo.png" width="150" height="150"></p>
 
-<h1 align="center">Instascrape</h1>
+<h1 align="center">instascrape</h1>
 
 <p align="center"><strong><i>A fast and lightweight Instagram media downloader.</i></strong></p>
 
@@ -20,18 +20,12 @@
   <a href="./LICENSE.txt"><img alt="license" src="https://img.shields.io/github/license/tnychn/instascrape.svg"></a>
 </p>
 
-<div align="center">
-    <sub><strong>Made with ♥︎ by tnychn</strong></sub>
-    <br>
-    <sub><strong>MIT © 2019 Tony Chan</strong></sub>
-</div>
-
 ---
 
-**Instascrape** is a fast and lightweight utility and Python library for downloading a massive amount of media (photos and videos)
+**instascrape** is a fast and lightweight utility and Python library for downloading a massive amount of media (photos and videos)
 from Instagram, without using the official Instagram Public API.
 
-> What makes **Instascrape** special, is that **Instascrape** aims at high efficeiency and speed.
+> What makes **instascrape** special, is that **instascrape** aims at high efficeiency and speed.
 > It provides a *preload* option that fetches and loads the full data of every item (Post/Profile) beforehand,
 > using multithreading with the *producer-consumer* strategy.
 
@@ -109,8 +103,16 @@ TODO
 
 ## Disclaimer
 
-This project is in no way authorized, maintained or sponsored by Instagram. Use Instascrape responsibly,
+This project is in no way authorized, maintained or sponsored by Instagram. Use instascrape responsibly,
 do not use it for spamming or illegal activities.
 
-We are not responsible for any kinds of negative actions that results from the use of *Instascrape*.
+We are not responsible for any kinds of negative actions that results from the use of *instascrape*.
 This is an independent and unofficial project. Use at your own risk.
+
+---
+
+<div align="center">
+  <sub><strong>Made with ♥︎ by tnychn</strong></sub>
+  <br>
+  <sub><strong>MIT © 2019 Tony Chan</strong></sub>
+</div>
