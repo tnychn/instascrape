@@ -2,7 +2,7 @@ import os
 import re
 from setuptools import setup, find_packages
 
-# Package Meta-Data
+# Package Metadata
 NAME = "instascraper"
 DESC = "A fast and lightweight Instagram media downloader."
 LONG_DESC = (
@@ -25,7 +25,7 @@ LONG_DESC = (
     "* 🕶 Can be used in anonymous mode",
 )
 AUTHOR = "tnychn"
-EMAIL = "tony.chan2342@gmail.com"
+EMAIL = "tonychan2342@gmail.com"
 URL = "https://github.com/tnychn/instascrape"
 ENTRY = "instascrape=instascrape.__main__:main"
 PYTHON_REQUIRES = ">=3.5.0"
