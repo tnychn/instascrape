@@ -28,7 +28,7 @@ AUTHOR = "tnychn"
 EMAIL = "tonychan2342@gmail.com"
 URL = "https://github.com/tnychn/instascrape"
 ENTRY = "instascrape=instascrape.__main__:main"
-PYTHON_REQUIRES = ">=3.5.0"
+PYTHON_REQUIRES = ">=3.6.0"
 REQUIRES = ["requests", "tqdm", "colorama"]
 KEYWORDS = ["instagram", "scraper", "downloader", "media", "api", "cli"]
 
