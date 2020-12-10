@@ -25,7 +25,7 @@ import traceback
 def excepthook(exctype, value, tb):
     logger.error(exctype.__name__ + ": " + str(value))
     logger.debug("".join(traceback.format_tb(tb)))
-    sys.__excepthook__(type, value, traceback)
+    sys.__excepthook__(exctype, value, tb)
 
 
 sys.excepthook = excepthook
