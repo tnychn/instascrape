@@ -93,14 +93,6 @@ with Instascraper() as insta:
     posts.download_all(dest="/Users/user/Pictures/Instagram")
 ```
 
-## Usage
-
-TODO
-
-~~For command-line (CLI) usage, see [`CLI.md`](./CLI.md).~~
-
-~~For library (API) usage, see [`API.md`](./API.md).~~
-
 ## Contributing
 
 If you have any ideas on how to improve this project or if you think there is a lack of features,
