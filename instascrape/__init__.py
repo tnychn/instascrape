@@ -1,4 +1,4 @@
-__version__ = "2.0.3.post1"
+__version__ = "2.0.4"
 
 # Environment set up
 import os
