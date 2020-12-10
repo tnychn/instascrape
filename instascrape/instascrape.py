@@ -98,18 +98,16 @@ class Instagram(LoggerMixin):
             # Get a new cookie by username and password
             self.logger.debug("getting cookie by username and password")
             # get initial cookie data
-            # FIXME: ugly code, to be resolved
-            req = session.get("https://www.instagram.com")
-            if "csrftoken" in req.cookies or "csrftoken" in session.cookies:
-                session.headers.update({"X-CSRFToken": req.cookies.get("csrftoken") or session.cookies.get("csrftoken", "")})
-            else:
-                self.logger.debug("failed to find 'csrftoken' in first attempt, using endpoint '/web/__mid'")
-                req = session.get("https://www.instagram.com/web/__mid")
-                if "csrftoken" not in req.cookies or "csrftoken" not in session.cookies:
-                    raise InstascrapeError("cannot find 'csrftoken' from cookies")
-                session.headers.update({"X-CSRFToken": req.cookies.get("csrftoken") or session.cookies.get("csrftoken", "")})
+            resp = session.get("https://www.instagram.com/data/shared_data/")
+            data = resp.json()
+            session.headers.update({"X-CSRFToken": data["config"]["csrf_token"]})
             # send login request
-            payload = {"username": username, "password": password}
+            payload = {
+                "queryParams": "{}",
+                "optIntoOneTap": "false",
+                "username": username,
+                "enc_password": "#PWD_INSTAGRAM_BROWSER:0:{}:{}".format(int(time.time()), password),
+            }
             resp = session.post(LOGIN_URL, data=payload)
             data = resp.json()
             self.logger.debug("login response data -> " + str(data))
